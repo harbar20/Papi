@@ -1,3 +1,6 @@
+#Discord port of @lukec11/slack-commands
+#Ported by @harbar20
+
 import discord
 from discord.ext import commands
 import json
@@ -9,7 +12,7 @@ bot = commands.Bot(command_prefix="!")
 #getting the bot token
 with open("config.json") as f:
     config = json.load(f)
-    
+
     token = config["token"]
     serverName = config["server"]
     
@@ -24,14 +27,14 @@ def online():
     server = MinecraftServer.lookup(serverName)
     server = server.status()
     
-    #makes the message to be outputed
+    #creates message that will be sent to discord
     message = ""
     if server.players.online == 0:
         message = "No players online!"
     else:
-        message += (str(server.players.online) + " out of " + str(server.players.max) + " online:\n")
+        message += (str(server.players.online) + " out of " + str(server.players.max) + " online:\n") #prints number of players online
         
-        for player in server.players.sample:
+        for player in server.players.sample: #prints the actual usernames of players who are online
             message += ("- " + player.name + "\n")
         
         return message
@@ -39,7 +42,7 @@ def online():
 #command for the players that are online
 @bot.command()
 async def players(ctx):
-    #gets the list of online players
+    #returns list of players to Discord
     onlinePlayers = online()
     
     #makes an embed of the list
