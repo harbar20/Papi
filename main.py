@@ -20,24 +20,22 @@ with open("config.json") as f:
 #when the bot goes online
 @bot.event
 async def on_ready():
-    print("Papi is ready!")
+    print("Bot is ready!")
 
 #checks the status on the server
 def online():
-    #gets server info
-    server = MinecraftServer.lookup(serverName)
+    server = MinecraftServer.lookup(serverName)    #gets server info
     server = server.status()
     
-    #creates message that will be sent to discord
-    message = ""
+    message = "" #creates message that will be sent to discord
     if server.players.online == 0:
         message = "No players online!"
     else:
-        message += (str(server.players.online) + " out of " + str(server.players.max) + " online:\n") #prints number of players online
+        message += (str(server.players.online) + " out of " + str(server.players.max) + " online:\n") #prints the number of players online
         
         for player in server.players.sample: #prints the actual usernames of players who are online
             message += ("- " + player.name + "\n")
-        
+
         return message
 
 #command for the players that are online
