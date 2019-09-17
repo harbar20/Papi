@@ -10,6 +10,7 @@ from mcstatus import MinecraftServer
 bot = commands.Bot(command_prefix="!")
 
 #getting the bot token
+#CONFIG FILE WILL NEED TO BE MODIFIED BEFORE PROGRAM CAN BE RUN
 with open("config.json") as f:
     config = json.load(f)
 
